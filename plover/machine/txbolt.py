@@ -3,7 +3,7 @@
 
 "Thread-based monitoring of a stenotype machine using the TX Bolt protocol."
 
-import plover.machine.base
+import machine.base
 
 # In the TX Bolt protocol, there are four sets of keys grouped in
 # order from left to right. Each byte represents all the keys that
@@ -30,7 +30,7 @@ STENO_KEY_CHART = ("S-", "T-", "K-", "P-", "W-", "H-",  # 00
                    "-T", "-S", "-D", "-Z", "#")         # 11
 
 
-class Stenotype(plover.machine.base.SerialStenotypeBase):
+class Stenotype(machine.base.SerialStenotypeBase):
     """TX Bolt interface.
 
     This class implements the three methods necessary for a standard

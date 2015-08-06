@@ -3,11 +3,11 @@
 
 "Manager for stenotype machines types."
 
-from plover.machine.geminipr import Stenotype as geminipr
-from plover.machine.txbolt import Stenotype as txbolt
-from plover.machine.sidewinder import Stenotype as sidewinder
-from plover.machine.stentura import Stenotype as stentura
-from plover.machine.passport import Stenotype as passport
+from machine.geminipr import Stenotype as geminipr
+from machine.txbolt import Stenotype as txbolt
+from machine.sidewinder import Stenotype as sidewinder
+from machine.stentura import Stenotype as stentura
+from machine.passport import Stenotype as passport
 
 try:
     from plover.machine.treal import Stenotype as treal

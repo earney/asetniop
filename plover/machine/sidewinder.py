@@ -7,9 +7,9 @@
 
 # TODO: Change name to NKRO Keyboard.
 
-from plover.machine.base import StenotypeBase
-from plover.machine.keymap import Keymap
-from plover.oslayer import keyboardcontrol
+from machine.base import StenotypeBase
+from machine.keymap import Keymap
+from oslayer import keyboardcontrol
 
 
 class Stenotype(StenotypeBase):

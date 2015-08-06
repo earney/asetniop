@@ -3,7 +3,7 @@
 
 """Thread-based monitoring of a Gemini PR stenotype machine."""
 
-import plover.machine.base
+import machine.base
 
 # In the Gemini PR protocol, each packet consists of exactly six bytes
 # and the most significant bit (MSB) of every byte is used exclusively
@@ -22,7 +22,7 @@ STENO_KEY_CHART = ("Fn", "#", "#", "#", "#", "#", "#",
 BYTES_PER_STROKE = 6
 
 
-class Stenotype(plover.machine.base.SerialStenotypeBase):
+class Stenotype(machine.base.SerialStenotypeBase):
     """Standard stenotype interface for a Gemini PR machine.
 
     This class implements the three methods necessary for a standard

@@ -8,9 +8,9 @@ from ConfigParser import RawConfigParser
 import os
 import shutil
 from cStringIO import StringIO
-from plover.exception import InvalidConfigurationError
-from plover.machine.registry import machine_registry
-from plover.oslayer.config import ASSETS_DIR, CONFIG_DIR
+from exception import InvalidConfigurationError
+from machine.registry import machine_registry
+from oslayer.config import ASSETS_DIR, CONFIG_DIR
 
 SPINNER_FILE = os.path.join(ASSETS_DIR, 'spinner.gif')
 

@@ -16,8 +16,8 @@ emits one or more Translation objects based on a greedy conversion algorithm.
 
 """
 
-from plover.steno import Stroke
-from plover.steno_dictionary import StenoDictionaryCollection
+from asetniop import Stroke
+from _dictionary import DictionaryCollection
 import itertools
 
 class Translation(object):
@@ -57,6 +57,7 @@ class Translation(object):
         """
         self.strokes = outline
         self.rtfcre = tuple(s.rtfcre for s in outline)
+        print('rtfcre:', self.rtfcre)
         self.english = translation
         self.replaced = []
         self.formatting = None
@@ -111,12 +112,13 @@ class Translator(object):
     def __init__(self):
         self._undo_length = 0
         self._dictionary = None
-        self.set_dictionary(StenoDictionaryCollection())
+        self.set_dictionary(DictionaryCollection())
         self._listeners = set()
         self._state = _State()
 
     def translate(self, stroke):
         """Process a single stroke."""
+        print("stroke:", stroke)
         _translate_stroke(stroke, self._state, self._dictionary, self._output)
         self._resize_translations()
 
@@ -263,6 +265,7 @@ def _translate_stroke(stroke, state, dictionary, callback):
         # stroke and build the stroke list for translation.
         num_strokes = 1
         translation_count = 0
+        print('state.translations:', state.translations)
         for t in reversed(state.translations):
             num_strokes += len(t)
             if num_strokes > dictionary.longest_key:
@@ -278,16 +281,20 @@ def _translate_stroke(stroke, state, dictionary, callback):
     callback(undo, do, state.last())
     state.translations.extend(do)
 
-SUFFIX_KEYS = ['-S', '-G', '-Z', '-D']
+#SUFFIX_KEYS = ['-S', '-G', '-Z', '-D']
+SUFFIX_KEYS = []
 
 def _find_translation(translations, dictionary, stroke):
+    print('_dict:', dictionary.dicts[0]._dict)
     t = _find_translation_helper(translations, dictionary, stroke, [])
     if t:
         return t
     mapping = _lookup([stroke], dictionary, [])
+    print('mapping', mapping)
     if mapping is not None:  # Could be the empty string.
         return Translation([stroke], mapping)
     t = _find_translation_helper(translations, dictionary, stroke, SUFFIX_KEYS)
+    print('t', t)
     if t:
         return t
     return Translation([stroke], _lookup([stroke], dictionary, SUFFIX_KEYS))
@@ -307,7 +314,9 @@ def _find_translation_helper(translations, dictionary, stroke, suffixes):
             return t
 
 def _lookup(strokes, dictionary, suffixes):
+    print('strokes', strokes)
     dict_key = tuple(s.rtfcre for s in strokes)
+    print('dict_key', dict_key)
     result = dictionary.lookup(dict_key)
     if result != None:
         return result

@@ -151,7 +151,7 @@ import itertools
 import struct
 import time
 
-import plover.machine.base
+import machine.base
 
 
 class _ProtocolViolationException(Exception):
@@ -641,7 +641,7 @@ def _loop(port, stop, callback, ready_callback, timeout=1):
             callback(stroke)
 
 
-class Stenotype(plover.machine.base.SerialStenotypeBase):
+class Stenotype(machine.base.SerialStenotypeBase):
     """Stentura interface.
 
     This class implements the three methods necessary for a standard

@@ -17,22 +17,22 @@ interface.
 
 
 # Import plover modules.
-import plover.config as conf
-import plover.formatting as formatting
-import plover.oslayer.keyboardcontrol as keyboardcontrol
-import plover.steno as steno
-import plover.machine.base
-import plover.machine.sidewinder
-import plover.steno_dictionary as steno_dictionary
-import plover.steno as steno
-import plover.translation as translation
-from plover.dictionary.base import load_dictionary
-from plover.exception import InvalidConfigurationError,DictionaryLoaderException
-import plover.dictionary.json_dict as json_dict
-import plover.dictionary.rtfcre_dict as rtfcre_dict
-from plover.machine.registry import machine_registry, NoSuchMachineException
-from plover.logger import Logger
-from plover.dictionary.loading_manager import manager as dict_manager
+import config as conf
+import formatting as formatting
+import oslayer.keyboardcontrol as keyboardcontrol
+#import steno as steno
+import asetniop as steno
+import machine.base
+import machine.sidewinder
+import steno_dictionary as steno_dictionary
+import translation as translation
+from dictionary.base import load_dictionary
+from exception import InvalidConfigurationError,DictionaryLoaderException
+import dictionary.json_dict as json_dict
+import dictionary.rtfcre_dict as rtfcre_dict
+from machine.registry import machine_registry, NoSuchMachineException
+from logger import Logger
+from dictionary.loading_manager import manager as dict_manager
 
 # Because 2.7 doesn't have this yet.
 class SimpleNamespace(object):
@@ -202,7 +202,7 @@ class StenoEngine(object):
         else:
             self.translator.clear_state()
             self.formatter.set_output(self.command_only_output)
-        if isinstance(self.machine, plover.machine.sidewinder.Stenotype):
+        if isinstance(self.machine, machine.sidewinder.Stenotype):
             self.machine.suppress_keyboard(self.is_running)
         for callback in self.subscribers:
             callback(None)
@@ -274,5 +274,3 @@ class StenoEngine(object):
 
     def _machine_state_callback(self, s):
         self.thread_hook(self._notify_listeners, s)
-
-

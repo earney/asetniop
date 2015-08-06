@@ -15,10 +15,10 @@ http://www.legalxml.org/workgroups/substantive/transcripts/cre-spec.htm
 
 import inspect
 import re
-from plover.steno import normalize_steno
-from plover.steno_dictionary import StenoDictionary
+from steno import normalize_steno
+from steno_dictionary import StenoDictionary
 # TODO: Move dictionary format somewhere more caninical than formatting.
-from plover.formatting import META_RE
+from formatting import META_RE
 
 # A regular expression to capture an individual entry in the dictionary.
 DICT_ENTRY_PATTERN = re.compile(r'(?s)(?<!\\){\\\*\\cxs (?P<steno>[^}]+)}' + 

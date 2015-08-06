@@ -5,9 +5,9 @@
 
 """
 
-from plover.steno_dictionary import StenoDictionary
-from plover.steno import normalize_steno
-from plover.exception import DictionaryLoaderException
+from steno_dictionary import StenoDictionary
+from steno import normalize_steno
+from exception import DictionaryLoaderException
 
 try:
     import simplejson as json

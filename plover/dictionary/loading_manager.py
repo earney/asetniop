@@ -4,8 +4,8 @@
 """Centralized place for dictionary loading operation."""
 
 import threading
-from plover.dictionary.base import load_dictionary
-from plover.exception import DictionaryLoaderException
+from dictionary.base import load_dictionary
+from exception import DictionaryLoaderException
 
 class DictionaryLoadingManager(object):
     def __init__(self):

@@ -5,7 +5,7 @@
 
 import os.path
 import re
-from plover.config import ASSETS_DIR
+from config import ASSETS_DIR
 
 word_list_file_name = os.path.join(ASSETS_DIR, 'american_english_words.txt')
 WORDS = dict()

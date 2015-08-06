@@ -3,7 +3,7 @@
 
 "Thread-based monitoring of a stenotype machine using the passport protocol."
 
-from plover.machine.base import SerialStenotypeBase
+from machine.base import SerialStenotypeBase
 from itertools import izip_longest
 
 # Passport protocol is documented here:
