@@ -4,5 +4,8 @@ See LICENSE.txt for details.
 asetniop: Open Source 
 ========================================
 
-This is a project forked from plover to create software to allow for faster, more efficient typing.
-By mainly using the middle row of a keyboard, users can type much more efficiently then using the key mappings used in QWERTY keyboards.
+This is a project (forked from plover) to create software to allow for 
+faster, more efficient typing, by mainly using the middle row of a 
+keyboard (the a,s,d,f,j,k,l and ; keys).  Using this configuration allows 
+users to type much more efficiently then using the key mappings used in
+QWERTY keyboards.
