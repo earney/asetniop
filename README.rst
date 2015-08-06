@@ -1,7 +1,7 @@
 Copyright (c) 2015 Billy Earney.
 See LICENSE.txt for details.
 
-asetniop: Open Source 
+asetniop: Faster typing.. 
 ========================================
 
 This is a project (forked from plover) to create software to allow for 
