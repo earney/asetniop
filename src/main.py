@@ -4,6 +4,7 @@ import os
 import shutil
 import sys
 import traceback
+import itertools
 
 import json
 import glob
@@ -14,10 +15,41 @@ import app
 import oslayer
 from oslayer import processlock
 from machine.sidewinder import Stenotype as sidewinder
-from machine.keymap import Keymap
+from machine.keymap import Keymap, SHIFT
 
 import _dictionary
 import output
+
+
+chords={"a": "a", "s": "s", "e": "e", "t": "t", ' ': ' ',
+        "n": "n", "i": "i", "o": "o", "p":"p",
+        "as": "w", "es": "d", "et": "r", "ae": "x",
+        "st": "c", "at": "f", "in": "h", "an": "q",
+        "io": "l", "no": "u", "ip": "k", "is": "z",
+        "np": "m", "en": "y", "it": "v", "nt": "b",
+        "ns": "j", "ot": "g", "pt": chr(8),  #backspace
+        chr(14)+' ': '\\n',    #enter key
+        "po": ";",
+}
+
+
+_dict={}
+for _key, _value in chords.items():
+    _dict[(_key,)]=_value
+    _dict[(SHIFT+_key,)]=_value.upper()
+    _dict[(_key+SHIFT,)]=_value.upper()
+    if len(_key) > 1:
+       _perms = ["".join(x) for x in itertools.permutations(_key, len(_key))]
+       for _perm in _perms:
+           _dict[(_perm,)]=_value
+
+       _perms = ["".join(x) for x in itertools.permutations(_key+SHIFT, len(_key+SHIFT))]
+       for _perm in _perms:
+           _dict[(_perm,)]=_value.upper()
+
+
+print(_dict)
+
 
 def main():
     """Launch asetniop."""
@@ -30,19 +62,7 @@ def main():
 
             _sdc=_dictionary.DictionaryCollection()
             _sdc.set_dicts(
-               [_dictionary.Dictionary({
-                  "a": "a", "s": "s", "e": "e", "t": "t", 
-                  "n": "n", "i": "i", "o": "o", "p":"p",
-                  ("as",): "w", ("es",): "d", ("et",): "r", ("ae",): "x",
-                  ("st",): "c", ("at",): "f", ("in",): "h", ("an",): "q",
-                  ("io",): "l", ("no",): "u", ("ip",): "k", ("is",): "z",
-                  ("np",): "m", ("en",): "y", ("it",): "v", ("nt",): "b",
-                  ("ns",): "j", ("ot",): "g",
-                  ("pt",): chr(8),  #backspace
-                  (chr(14)+' ',): chr(10),    #enter key
-                  ("po",): ";",
-                })
-               ]
+               [_dictionary.Dictionary(_dict)]
             )
             _engine.set_dictionary(_sdc)
 
