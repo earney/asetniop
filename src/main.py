@@ -34,8 +34,14 @@ def main():
                   "a": "a", "s": "s", "e": "e", "t": "t", 
                   "n": "n", "i": "i", "o": "o", "p":"p",
                   ("as",): "w", ("se",): "d", ("et",): "r", ("ae",): "x",
-                  ("sf",): "c", ("at",): "f", ("ni",): "h",
-                  ("io",): "l", ("no",): "u", ("ip",) : "k"})
+                  ("st",): "c", ("at",): "f", ("ni",): "h", ("an",): "q",
+                  ("io",): "l", ("no",): "u", ("ip",): "k", ("si",): "z",
+                  ("np",): "m", ("en",): "y", ("ti",): "v", ("tn",): "b",
+                  ("sn",): "j", ("to",): "g",
+                  ("tp",): chr(8),  #backspace
+                  (chr(14)+' ',): chr(10),    #enter key
+                  ("op",): ";",
+})
                ]
             )
             _engine.set_dictionary(_sdc)
