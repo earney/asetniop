@@ -2,7 +2,7 @@ import json
 from collections import OrderedDict
 
 SHIFT="z"
-SPACE=chr(20)
+SPACE=' '
 
 class Keymap():
     def __init__(self, assignments):
@@ -49,7 +49,7 @@ class Keymap():
             ["i", "k"],
             ["o", "l"],
             ["p", ";"],
-            [SPACE, " "],
+            [SPACE, SPACE],
             #shift keys
             [SHIFT, "c"],
             [SHIFT, "v"],
