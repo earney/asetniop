@@ -1,7 +1,7 @@
 import json
 from collections import OrderedDict
 
-SHIFT="z"
+SHIFT=" "
 SPACE=' '
 
 class Keymap():
@@ -34,26 +34,21 @@ class Keymap():
         assignments = []
         for row in rows:
             stenoKey = row[0]
-            keylist = row[1].strip().split()
+            keylist = row[1].split()
             assignments.append([stenoKey, keylist])
         return Keymap(assignments)
 
     @staticmethod
     def default():
-        return Keymap.from_rows([
-            ['a', 'a'],
-            ["s", "s"],
-            ["e", "d"],
-            ["t", "f"],
-            ["n", "j"],
-            ["i", "k"],
-            ["o", "l"],
-            ["p", ";"],
-            [SPACE, SPACE],
-            #shift keys
-            [SHIFT, "c"],
-            [SHIFT, "v"],
-            [SHIFT, "b"],
-            [SHIFT, "n"],
-            [SHIFT, "m"]
+        return Keymap([
+            ['a', ['a']],
+            ["s", ["s"]],
+            ["e", ["d"]],
+            ["t", ["f"]],
+            ["n", ["j"]],
+            ["i", ["k"]],
+            ["o", ["l"]],
+            ["p", [";"]],
+            #[SHIFT, [' ', "c","v","b","n", "m"]]
+            [SHIFT, [' ']]
 ])
