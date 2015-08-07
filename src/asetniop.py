@@ -13,12 +13,9 @@ Stroke -- A data model class that encapsulates a sequence of steno keys.
 
 import re
 
-STROKE_DELIMITER = ''
-#IMPLICIT_HYPHENS = set('AOEU*50')
-
 def normalize_steno(strokes_string):
     """Convert steno strings to one common form."""
-    strokes = strokes_string.split(STROKE_DELIMITER)
+    strokes = [strokes_string]
     normalized_strokes = []
     for stroke in strokes:
         if '#' in stroke:
@@ -34,7 +31,6 @@ def normalize_steno(strokes_string):
     return tuple(normalized_strokes)
 
 KEY_NUMBERS = {}
-#KEY_ORDER = {}   
 
 class Stroke:
     """A standardized data model for stenotype machine strokes.
@@ -49,11 +45,9 @@ class Stroke:
 
     """
 
-    #IMPLICIT_HYPHEN = set(('A-', 'O-', '5-', '0-', '-E', '-U', '*'))
     IMPLICIT_HYPHEN = set()
 
     def __init__(self, keys):
-        print("Stroke(%s)" % ",".join(keys))
         """Create a steno stroke by formatting steno keys.
 
         Arguments:
@@ -79,29 +73,19 @@ class Stroke:
             if numeral:
                 keys.remove('#')
         
-        if keys_set & self.IMPLICIT_HYPHEN:
+        if keys_set:
             self.rtfcre = ''.join(key.strip('-') for key in keys)
-            print("got here")
-        else:
-            pre = ''.join(k.strip('-') for k in keys if k[-1] == '-' or 
-                          k == '#')
-            post = ''.join(k.strip('-') for k in keys if k[0] == '-')
-            self.rtfcre = '-'.join([pre, post]) if post else pre
-            print("got here2")
 
         self._keys = keys
 
         # Determine if this stroke is a correction stroke.
         self.is_correction = (self.rtfcre == '*')
 
-        print('*** rtfcre', self.rtfcre)
-
     def __str__(self):
         if self.is_correction:
             prefix = '*'
         else:
             prefix = ''
-        return '%sStroke1(%s : %s)' % (prefix, self.rtfcre, self._keys)
 
     def __eq__(self, other):
         return (isinstance(other, Stroke)

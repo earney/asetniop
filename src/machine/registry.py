@@ -1,18 +1,8 @@
-# Copyright (c) 2013 Hesky Fisher
 # See LICENSE.txt for details.
 
 "Manager for stenotype machines types."
 
-from machine.geminipr import Stenotype as geminipr
-from machine.txbolt import Stenotype as txbolt
 from machine.sidewinder import Stenotype as sidewinder
-from machine.stentura import Stenotype as stentura
-from machine.passport import Stenotype as passport
-
-try:
-    from plover.machine.treal import Stenotype as treal
-except:
-    treal = None
 
 class NoSuchMachineException(Exception):
     def __init__(self, id):
@@ -49,11 +39,4 @@ class Registry(object):
 
 machine_registry = Registry()
 machine_registry.register('NKRO Keyboard', sidewinder)
-machine_registry.register('Gemini PR', geminipr)
-machine_registry.register('TX Bolt', txbolt)
-machine_registry.register('Stentura', stentura)
-machine_registry.register('Passport', passport)
-if treal:
-    machine_registry.register('Treal', treal)
-
 machine_registry.add_alias('Microsoft Sidewinder X4', 'NKRO Keyboard')

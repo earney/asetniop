@@ -10,14 +10,12 @@ class Output(object):
         self.CallAfter(self.keyboard_control.send_backspaces, b)
 
     def send_string(self, t):
-        print('send_string', t)
         self.CallAfter(self.keyboard_control.send_string, t)
 
     def send_key_combination(self, c):
         self.CallAfter(self.keyboard_control.send_key_combination, c)
 
     def CallAfter(self, func, value):
-        #print('CallAfter', func, value)
         func(value)
 
     # TODO: test all the commands now

@@ -328,11 +328,8 @@ def _raw_to_actions(stroke, last_action, spaces_after):
     no_dash = stroke.replace('-', '', 1)
     if no_dash.isdigit():
         return _translation_to_actions(no_dash, last_action, spaces_after)
-    else:
-        if spaces_after:
-            return [_Action(text=(stroke + SPACE), word=stroke)]
-        else:
-            return [_Action(text=(SPACE + stroke), word=stroke)]
+    
+    return [_Action(text=(stroke), word=stroke)]
 
 def _atom_to_action(atom, last_action, spaces_after):
     """Convert an atom into an action.
@@ -444,8 +441,9 @@ def _atom_to_action_spaces_before(atom, last_action):
             text = _capitalize(text)
         if last_lower:
             text = _lower(text)
-        space = NO_SPACE if last_attach else SPACE
-        action.text = space + text
+        #space = NO_SPACE if last_attach else SPACE
+        #action.text = space + text
+        action.text = text
         action.word = _rightmost_word(text)
     return action
 
