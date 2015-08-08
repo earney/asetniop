@@ -10,14 +10,12 @@ import sys
 
 
 class LockNotAcquiredException(Exception):
-
     pass
 
 if sys.platform.startswith('win32'):
     import win32event
     import win32api
     import winerror
-
 
     class PloverLock(object):
         # A GUID from http://createguid.com/

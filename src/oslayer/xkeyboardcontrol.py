@@ -10,6 +10,8 @@
 # This code is based on the AutoKey and pyxhook programs, both of
 # which use python-xlib.
 
+from __future__ import print_function
+
 """Keyboard capture and control using Xlib.
 
 This module provides an interface for basic keyboard event capture and
@@ -151,9 +153,12 @@ class KeyboardCapture(threading.Thread):
         if reply.client_swapped:
             # Ignoring swapped protocol data.
             return
-        if not len(reply.data) or ord(reply.data[0]) < 2:
+        if not len(reply.data):
             # Not an event.
             return
+        if isinstance(reply.data[0], str) and ord(reply.data[0]) < 2:
+           return
+
         data = reply.data
         while len(data):
             event, data = rq.EventField(None).parse_binary_value(data,
@@ -221,7 +226,7 @@ class KeyboardEmulation(object):
         number_of_backspace -- The number of backspaces to emulate.
 
         """
-        for x in xrange(number_of_backspaces):
+        for x in range(number_of_backspaces):
             self._send_keycode(self.backspace_keycode)
 
     def send_string(self, s):
@@ -379,7 +384,7 @@ class KeyboardEmulation(object):
         keysym -- A key symbol.
 
         """
-        keycodes = self.display.keysym_to_keycodes(keysym)
+        keycodes = list(self.display.keysym_to_keycodes(keysym))
         if len(keycodes) > 0:
             keycode, offset = keycodes[0]
             modifiers = 0
@@ -440,7 +445,7 @@ if __name__ == '__main__':
     def test(event):
         if not event.keycode:
             return
-        print event
+        #print(event)
         time.sleep(0.1)
         keycode_events = ke.send_key_combination('Alt_L(Tab)')
         #ke.send_backspaces(5)
@@ -449,7 +454,7 @@ if __name__ == '__main__':
     #kc.key_down = test
     kc.key_up = test
     kc.start()
-    print 'Press CTRL-c to quit.'
+    print('Press CTRL-c to quit.')
     try:
         while True:
             pass

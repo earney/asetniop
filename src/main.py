@@ -48,9 +48,6 @@ for _key, _value in chords.items():
            _dict[(_perm,)]=_value.upper()
 
 
-print(_dict)
-
-
 def main():
     """Launch asetniop."""
     try:

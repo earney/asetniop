@@ -5,17 +5,7 @@
 
 import os.path
 import re
-from config import ASSETS_DIR
-
-#word_list_file_name = os.path.join(ASSETS_DIR, 'american_english_words.txt')
 WORDS = dict()
-#try:
-#    with open(word_list_file_name) as f:
-#        pairs = [word.strip().rsplit(' ', 1) for word in f]
-#        pairs.sort(reverse=True, key=lambda x: int(x[1]))
-#        WORDS = {p[0].lower(): int(p[1]) for p in pairs}
-#except IOError as e:
-#    print e
 
 RULES = [
     # == +ly ==

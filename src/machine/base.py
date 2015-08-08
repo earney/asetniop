@@ -6,7 +6,9 @@
 
 """Base classes for machine types. Do not use directly."""
 
-import serial
+from __future__ import print_function
+
+#import serial
 import threading
 from exception import SerialPortException
 import collections
@@ -158,7 +160,7 @@ class SerialStenotypeBase(ThreadedStenotypeBase):
         try:
             self.serial_port = serial.Serial(**self.serial_params)
         except (serial.SerialException, OSError) as e:
-            print e
+            print(e)
             self._error()
             return
         if self.serial_port is None or not self.serial_port.isOpen():

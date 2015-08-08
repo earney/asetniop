@@ -6,7 +6,12 @@
 #
 # Uses OS appropriate module.
 
-"""Keyboard capture and control.
+from __future__ import print_function
+
+# This code is based on the AutoKey and pyxhook programs, both of
+# which use python-xlib.
+
+"""Keyboard capture and control using XLib.
 
 This module provides an interface for basic keyboard event capture and
 emulation. Set the key_up and key_down functions of the
@@ -22,11 +27,11 @@ KEYBOARDCONTROL_NOT_FOUND_FOR_OS = \
         "No keyboard control module was found for os %s" % sys.platform
 
 if sys.platform.startswith('linux'):
-    import xkeyboardcontrol as keyboardcontrol
+    from . import xkeyboardcontrol as keyboardcontrol
 elif sys.platform.startswith('win32'):
-    import winkeyboardcontrol as keyboardcontrol
+    from . import winkeyboardcontrol as keyboardcontrol
 elif sys.platform.startswith('darwin'):
-    import osxkeyboardcontrol as keyboardcontrol
+    from . import osxkeyboardcontrol as keyboardcontrol
 else:
     raise Exception(KEYBOARDCONTROL_NOT_FOUND_FOR_OS)
 
@@ -46,7 +51,7 @@ if __name__ == '__main__':
     ke = KeyboardEmulation()
 
     def test(event):
-        print event
+        #print(event)
         ke.send_backspaces(3)
         ke.send_string('foo')
 
@@ -56,7 +61,7 @@ if __name__ == '__main__':
     kc.key_down = test
     kc.key_up = test
     kc.start()
-    print 'Press CTRL-c to quit.'
+    print('Press CTRL-c to quit.')
     try:
         while True:
             pass

@@ -85,7 +85,7 @@ class Formatter(object):
         new = [a for t in do for a in t.formatting]
         
         min_length = min(len(old), len(new))
-        for i in xrange(min_length):
+        for i in range(min_length):
             if old[i] != new[i]:
                 break
         else:
