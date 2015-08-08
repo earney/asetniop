@@ -20,33 +20,47 @@ from machine.keymap import Keymap, SHIFT
 import _dictionary
 import output
 
-
 chords={"a": "a", "s": "s", "e": "e", "t": "t", ' ': ' ',
         "n": "n", "i": "i", "o": "o", "p":"p",
         "as": "w", "es": "d", "et": "r", "ae": "x",
         "st": "c", "at": "f", "in": "h", "an": "q",
         "io": "l", "no": "u", "ip": "k", "is": "z",
         "np": "m", "en": "y", "it": "v", "nt": "b",
-        "ns": "j", "ot": "g", "pt": chr(8),  #backspace
-        chr(14)+' ': '\\n',    #enter key
+        "ns": "j", "ot": "g", 
+        "pt": u'\uFF08',  #backspace
+        SHIFT+' ': u'\uFF0D',    #enter key
         "po": ";",
+        SHIFT+"po": ":",
+        "eo": "-",
+        SHIFT+"eo": "_",
+        "ei": ",",
+        SHIFT+"ei": "<",
+        "so": ".",
+        SHIFT+"so": ">",
+        "sp": ")",
+        "ao": "(",
+        "ai": "!"
 }
 
 
 _dict={}
 for _key, _value in chords.items():
     _dict[(_key,)]=_value
-    _dict[(SHIFT+_key,)]=_value.upper()
-    _dict[(_key+SHIFT,)]=_value.upper()
+    if _value.isalpha():
+       _dict[(SHIFT+_key,)]=_value.upper()
+       _dict[(_key+SHIFT,)]=_value.upper()
     if len(_key) > 1:
        _perms = ["".join(x) for x in itertools.permutations(_key, len(_key))]
        for _perm in _perms:
            _dict[(_perm,)]=_value
 
-       _perms = ["".join(x) for x in itertools.permutations(_key+SHIFT, len(_key+SHIFT))]
-       for _perm in _perms:
-           _dict[(_perm,)]=_value.upper()
+       if _value.isalpha():
+          _perms = ["".join(x) for x in itertools.permutations(_key+SHIFT, len(_key+SHIFT))]
+          for _perm in _perms:
+              _dict[(_perm,)]=_value.upper()
 
+
+print(_dict)
 
 def main():
     """Launch asetniop."""

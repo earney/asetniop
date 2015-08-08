@@ -1,7 +1,7 @@
 import json
 from collections import OrderedDict
 
-SHIFT=" "
+SHIFT="z"
 SPACE=' '
 
 class Keymap():
@@ -49,6 +49,6 @@ class Keymap():
             ["i", ["k"]],
             ["o", ["l"]],
             ["p", [";"]],
-            #[SHIFT, [' ', "c","v","b","n", "m"]]
-            [SHIFT, [' ']]
+            [SHIFT, ["c","v","b","n","m"]],
+            [SPACE, [' ']]
 ])
