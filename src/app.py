@@ -89,6 +89,9 @@ class StenoEngine(object):
         self.running_state = self.translator.get_state()
         self.set_is_running(False)
 
+        self._dictionaries=[]
+        self._count=0
+
     def set_machine(self, machine):
         if self.machine:
             self.machine.remove_state_callback(self._machine_state_callback)
@@ -105,7 +108,9 @@ class StenoEngine(object):
             self.set_is_running(False)
 
     def set_dictionary(self, d):
-        self.translator.set_dictionary(d)
+        self._dictionaries.append(d)
+        if len(self._dictionaries) == 1:
+           self.translator.set_dictionary(d)
 
     def get_dictionary(self):
         return self.translator.get_dictionary()
@@ -177,6 +182,12 @@ class StenoEngine(object):
 
     def _translate_stroke(self, s):
         stroke = steno.Stroke(s)
+        if stroke.rtfcre == "anpt":
+           print("changing dictionary")
+           self._count+=1
+           _pos=self._count % len(self._dictionaries)
+           self.translator.set_dictionary(self._dictionaries[_pos])
+           return
         self.translator.translate(stroke)
         for listener in self.stroke_listeners:
             listener(stroke)

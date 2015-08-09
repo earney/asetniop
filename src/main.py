@@ -23,56 +23,55 @@ import output
 num_chords={'a': '1', 's': '2', 'e': '3', 't': '4',
             SHIFT: '5', ' ': '6', 'n': '7', 'i': '8',
             'o': '9', 'p': '0',
-            SHIFT+'a': '!',
-            SHIFT+'s': '@',
-            SHIFT+'e': '#',
-            SHIFT+'t': '$',
+            'a'+SHIFT: '!',
+            's'+SHIFT: '@',
+            'e'+SHIFT: '#',
+            't'+SHIFT: '$',
             SHIFT+SHIFT: '%',
-            SHIFT+' ': '^',
-            SHIFT+'n': '&',
-            SHIFT+'i': '*',
-            SHIFT+'o': '(',
-            SHIFT+'t': ')',
+            ' '+SHIFT: '^',
+            'n'+SHIFT: '&',
+            'i'+SHIFT: '*',
+            'o'+SHIFT: '(',
+            'p'+SHIFT: ')',
 
             'at': '[',
-            SHIFT+'at': '{',
+            'at'+SHIFT: '{',
 
             'np': ']',
-            SHIFT+'np': '}',
+            'np'+SHIFT: '}',
 
-            'se': '-',
-            SHIFT+'se': '_',
+            'es': '-',
+            'es'+SHIFT: '_',
             'ae': '`',
-            SHIFT+'ae': '~',
+            'ae'+SHIFT: '~',
             'io': '=',
-            SHIFT+'io': '+',
+            'io'+SHIFT: '+',
             'op': ';',
-            SHIFT+'op': ':',
+            'op'+SHIFT: ':',
 
             'ip': '\\',
-            SHIFT+'io': '|',
-            SHIFT+' ': u'\uFF0D',    #enter key
+            'io'+SHIFT: '|',
 
-            'so': '.',
-            SHIFT+'so': '>',
+            'os': '.',
+            'os'+SHIFT: '>',
             'ei': ',',
-            SHIFT+'ei': '<',
+            'ei'+SHIFT: '<',
             
             'ep': "'",
-            SHIFT+'ep': '"',
+            'ep'+SHIFT: '"',
             
             'ap': '?',
-            SHIFT+'ap': '/',
+            'ap'+SHIFT: '/',
 
             'ai': '!',
             'ao': '(',
-            'sp': ')',
+            'ps': ')',
             
             'eo': '-',
-            SHIFT+'eo': '_',
+            'eo'+SHIFT: '_',
 
-            'si': '+',
-            SHIFT+'si': '=',
+            'is': '+',
+            'is'+SHIFT: '=',
 }
 
 chords={"a": "a", "s": "s", "e": "e", "t": "t", ' ': ' ',
@@ -109,6 +108,19 @@ for _key, _value in chords.items():
        #_dict[_key+SHIFT]=_value.upper()
        _dict[(_key+SHIFT,)]=_value.upper()
 
+_dicts=[]
+_dicts.append(_dict)
+
+_dict={}
+for _key, _value in num_chords.items():
+    _k=_key.split()
+    _k.sort()
+    _key=''.join(_k)
+
+    _dict[(_key,)]=_value
+
+_dicts.append(_dict)
+
 print(_dict)
 
 def main():
@@ -120,11 +132,10 @@ def main():
             _engine.set_machine(sidewinder({'keymap': Keymap([]).default(),
                                             'arpeggiate': False}))
 
-            _sdc=_dictionary.DictionaryCollection()
-            _sdc.set_dicts(
-               [_dictionary.Dictionary(_dict)]
-            )
-            _engine.set_dictionary(_sdc)
+            for _dict in _dicts:
+                _sdc=_dictionary.DictionaryCollection()
+                _sdc.set_dicts([_dictionary.Dictionary(_dict)])
+                _engine.set_dictionary(_sdc)
 
             def consume_command(command):
                 print('=>',command)
