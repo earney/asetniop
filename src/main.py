@@ -20,6 +20,61 @@ from machine.keymap import Keymap, SHIFT
 import _dictionary
 import output
 
+num_chords={'a': '1', 's': '2', 'e': '3', 't': '4',
+            SHIFT: '5', ' ': '6', 'n': '7', 'i': '8',
+            'o': '9', 'p': '0',
+            SHIFT+'a': '!',
+            SHIFT+'s': '@',
+            SHIFT+'e': '#',
+            SHIFT+'t': '$',
+            SHIFT+SHIFT: '%',
+            SHIFT+' ': '^',
+            SHIFT+'n': '&',
+            SHIFT+'i': '*',
+            SHIFT+'o': '(',
+            SHIFT+'t': ')',
+
+            'at': '[',
+            SHIFT+'at': '{',
+
+            'np': ']',
+            SHIFT+'np': '}',
+
+            'se': '-',
+            SHIFT+'se': '_',
+            'ae': '`',
+            SHIFT+'ae': '~',
+            'io': '=',
+            SHIFT+'io': '+',
+            'op': ';',
+            SHIFT+'op': ':',
+
+            'ip': '\\',
+            SHIFT+'io': '|',
+            SHIFT+' ': u'\uFF0D',    #enter key
+
+            'so': '.',
+            SHIFT+'so': '>',
+            'ei': ',',
+            SHIFT+'ei': '<',
+            
+            'ep': "'",
+            SHIFT+'ep': '"',
+            
+            'ap': '?',
+            SHIFT+'ap': '/',
+
+            'ai': '!',
+            'ao': '(',
+            'sp': ')',
+            
+            'eo': '-',
+            SHIFT+'eo': '_',
+
+            'si': '+',
+            SHIFT+'si': '=',
+}
+
 chords={"a": "a", "s": "s", "e": "e", "t": "t", ' ': ' ',
         "n": "n", "i": "i", "o": "o", "p":"p",
         "as": "w", "es": "d", "et": "r", "ae": "x",
@@ -45,20 +100,14 @@ chords={"a": "a", "s": "s", "e": "e", "t": "t", ' ': ' ',
 
 _dict={}
 for _key, _value in chords.items():
+    _k=_key.split()
+    _k.sort()
+    _key=''.join(_k)
+    #_dict[_key]=_value
     _dict[(_key,)]=_value
     if _value.isalpha():
-       _dict[(SHIFT+_key,)]=_value.upper()
+       #_dict[_key+SHIFT]=_value.upper()
        _dict[(_key+SHIFT,)]=_value.upper()
-    if len(_key) > 1:
-       _perms = ["".join(x) for x in itertools.permutations(_key, len(_key))]
-       for _perm in _perms:
-           _dict[(_perm,)]=_value
-
-       if _value.isalpha():
-          _perms = ["".join(x) for x in itertools.permutations(_key+SHIFT, len(_key+SHIFT))]
-          for _perm in _perms:
-              _dict[(_perm,)]=_value.upper()
-
 
 print(_dict)
 
