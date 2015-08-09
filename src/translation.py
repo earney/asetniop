@@ -306,8 +306,12 @@ def _find_translation_helper(translations, dictionary, stroke, suffixes):
             return t
 
 def _lookup(strokes, dictionary, suffixes):
-    dict_key = tuple(s.rtfcre for s in strokes)
-    result = dictionary.lookup(dict_key)
+    #dict_key = tuple(s.rtfcre for s in strokes)
+    dict_key = [s.rtfcre for s in strokes]
+    dict_key.sort()
+    result = dictionary.lookup(tuple(dict_key))
+    #result = dictionary.lookup(''.join(dict_key))
+    #print(tuple(dict_key), result)
     if result != None:
         return result
 
